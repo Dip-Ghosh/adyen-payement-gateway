@@ -26,7 +26,11 @@ class PaymentController extends Controller
 
             return response()->json(["response" => $response]);
         }catch (\Exception $e) {
-            //throw new \Exception($e->getMessage);
+
+            return response()->json([
+                "error" => $e->getMessage(),
+                "code" => $e->getCode()
+            ], $e->getStatus());
         }
     }
 
