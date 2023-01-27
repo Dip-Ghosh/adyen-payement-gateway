@@ -29,12 +29,12 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4 pb-1">
                                         <label class="form-label" for="formControlLgXc">Card Number</label>
-                                        <input type="text" name="card_number" id="formControlLgXc" class="form-control form-control-lg" value="4111 1111 4555 1142"/>
+                                        <input type="text" name="card_number" id="formControlLgXc" placeholder="4111 1111 4555 1142" class="form-control form-control-lg" value=""/>
 
                                     </div>
                                     <div class="col-md-6 mb-4 pb-1">
                                         <label class="form-label" for="formControlLgXsd">Cardholder's Name</label>
-                                        <input type="text" name="card_holder" id="formControlLgXsd" class="form-control form-control-lg" value="Anna Doe"/>
+                                        <input type="text" name="card_holder" id="formControlLgXsd" class="form-control form-control-lg"  placeholder="Dip Ghosh" value=""/>
 
                                     </div>
 
@@ -42,7 +42,7 @@
                                         <div class="form-outline">
                                             <label class="form-label" for="formControlLgExpk">Expire</label>
                                             <input name="expire" type="password" id="formControlLgExpk"
-                                                   class="form-control form-control-lg" value="03/2030"
+                                                   class="form-control form-control-lg" value=""
                                                    placeholder="MM/YYYY"/>
 
                                         </div>
@@ -50,9 +50,9 @@
                                     <div class="col-md-6 mb-4 pb-1">
                                         <div class="form-outline">
                                             <label class="form-label" for="formControlLgcvv">CVV</label>
-                                            <input  name="cvv" type="password" id="formControlLgcvv" value="737"
+                                            <input  name="cvv" type="password" id="formControlLgcvv"  value=""
                                                     class="form-control form-control-lg"
-                                                    placeholder="Cvv"/>
+                                                    placeholder="737"/>
 
                                         </div>
                                     </div>
