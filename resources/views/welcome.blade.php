@@ -24,53 +24,44 @@
                                 <h6>Payment Through Adyen</h6>
                             </div>
                             <hr>
-                            <form action="{{url('/payment')}}" method="POST" >
-                                <div class="d-flex flex-row align-items-center mb-4 pb-1">
-                                    <label class="form-label" for="formControlLgXc">Card Number</label>
-                                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
-                                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png"/>
-                                    <div class="flex-fill mx-3">
-                                        <div class="form-outline">
-                                            <input type="text" id="formControlLgXc" class="form-control form-control-lg" value="**** **** **** 3193"/>
-                                        </div>
+                            <form action="{{route('api.payment')}}" method="POST" >
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-1">
+                                        <label class="form-label" for="formControlLgXc">Card Number</label>
+                                        <input type="text" name="card_number" id="formControlLgXc" class="form-control form-control-lg" value="4111 1111 4555 1142"/>
+
                                     </div>
-                                </div>
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="formControlLgXsd">Cardholder's Name</label>
-                                    <input type="text" id="formControlLgXsd" class="form-control form-control-lg" value="Anna Doe"/>
+                                    <div class="col-md-6 mb-4 pb-1">
+                                        <label class="form-label" for="formControlLgXsd">Cardholder's Name</label>
+                                        <input type="text" name="card_holder" id="formControlLgXsd" class="form-control form-control-lg" value="Anna Doe"/>
 
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-7">
-                                        <div class="form-outline">
-                                            <label class="form-label" for="formControlLgXM">Card Number</label>
-                                            <input type="text" id="formControlLgXM" class="form-control form-control-lg"
-                                                   value="1234 5678 1234 5678"/>
-
-                                        </div>
                                     </div>
-                                    <div class="col-3">
+
+                                    <div class="col-md-6 mb-4 pb-1">
                                         <div class="form-outline">
                                             <label class="form-label" for="formControlLgExpk">Expire</label>
-                                            <input type="password" id="formControlLgExpk"
-                                                   class="form-control form-control-lg"
+                                            <input name="expire" type="password" id="formControlLgExpk"
+                                                   class="form-control form-control-lg" value="03/2030"
                                                    placeholder="MM/YYYY"/>
 
                                         </div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-md-6 mb-4 pb-1">
                                         <div class="form-outline">
-                                            <label class="form-label" for="formControlLgcvv">Cvv</label>
-                                            <input type="password" id="formControlLgcvv"
-                                                   class="form-control form-control-lg"
-                                                   placeholder="Cvv"/>
+                                            <label class="form-label" for="formControlLgcvv">CVV</label>
+                                            <input  name="cvv" type="password" id="formControlLgcvv" value="737"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="Cvv"/>
 
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="submit" class="btn btn-primary ">Pay Now</button>
+                                    </div>
+                                </div>
 
-                                <button class="btn btn-primary btn-md btn-block justify-content-md-end">Pay</button>
                             </form>
                         </div>
                     </div>
