@@ -38,7 +38,8 @@ class PaymentController extends Controller
         $expire         = explode('/',  $params['expire']);
         $month          = $expire[0];
         $year           = $expire[1];
-        $params         = [
+
+        $data         = [
                 "amount" => [
                     "currency" => "USD",
                     "value" => 1000
@@ -52,9 +53,8 @@ class PaymentController extends Controller
                     "cvc"         => $cvv
                 ],
                 "returnUrl" => "https://your-company.com/checkout?shopperOrder=12xy..",
-                "merchantAccount" => "EcisAccountECOM"
+                "merchantAccount" => env('ADYEN_MARCHANT_ACCOUNT')
         ];
-
-        return $params;
+        return $data;
     }
 }
