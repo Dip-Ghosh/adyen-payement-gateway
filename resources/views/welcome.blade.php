@@ -25,6 +25,7 @@
                             </div>
                             <hr>
                             <form action="{{route('api.payment')}}" method="POST" >
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-4 pb-1">
                                         <label class="form-label" for="formControlLgXc">Card Number</label>

@@ -16,17 +16,17 @@ class PaymentController extends Controller
     public function makePayment(Request $request)
     {
         try {
-            $client = new  Client();
-            $service = new Checkout($client);
-            $client->setEnvironment(env('ADYEN_ENVIROMENT'));
-            $client->setXApiKey(env('ADYEN_PAYMENT_KEY'));
+            $client = new Client();
+            $client->setEnvironment(Environment::TEST);
+            $client->setXApiKey(env('ADYEN_PAYMENT_KEY', null));
 
             $params = $this->prepareParams($request->all());
+            $service = new Checkout($client);
             $response = $service->payments($params);
 
             return response()->json(["response" => $response]);
         }catch (\Exception $e) {
-            throw new \Exception($e->getMessage);
+            //throw new \Exception($e->getMessage);
         }
     }
 
@@ -53,7 +53,7 @@ class PaymentController extends Controller
                     "cvc"         => $cvv
                 ],
                 "returnUrl" => "https://your-company.com/checkout?shopperOrder=12xy..",
-                "merchantAccount" => env('ADYEN_MARCHANT_ACCOUNT')
+                "merchantAccount" => env('ADYEN_MARCHANT_ACCOUNT', null)
         ];
         return $data;
     }
