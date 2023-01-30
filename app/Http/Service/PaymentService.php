@@ -2,6 +2,7 @@
 
 namespace App\Http\Service;
 
+use Adyen\AdyenException;
 use Adyen\Client;
 use Adyen\Environment;
 use Adyen\Service\Checkout;
@@ -10,14 +11,14 @@ class PaymentService
 {
     CONST ENVIRONMENT = Environment::TEST;
 
-    protected $client;
+    protected Client $client;
 
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    public function makePaymentRequest($params)
+    public function makePaymentRequest($params): array
     {
         $this->client->setEnvironment(self::ENVIRONMENT);
         $this->client->setXApiKey(env('ADYEN_PAYMENT_KEY', null));
@@ -25,35 +26,40 @@ class PaymentService
         $service = new Checkout($this->client);
 
         return $service->payments(  $this->prepareParams($params));
-
     }
 
+    private function prepareParams($params): array
+    {
+        return [
+            "amount"          => $this->prepareAmountParams($params),
+            "reference"       => "YOUR_ORDER_NUMBER",
+            "paymentMethod"   => $this->preparePaymentParams($params),
+            "returnUrl"       => env('REDIRECT_URL',null),
+            "merchantAccount" => env('ADYEN_MARCHANT_ACCOUNT', null),
+        ];
+    }
 
-    private function prepareParams($params)
+    private function preparePaymentParams($params): array
     {
         $cardNumber     = preg_replace('/(?<=\d)\s+(?=\d)/', '', $params['card_number']);
         $cardHolderName = $params['card_holder'];
         $cvv            = $params['cvv'];
         $expire         = explode('/',  $params['expire']);
-        $month          = $expire[0];
-        $year           = $expire[1];
 
-        $data         = [
-            "amount" => [
-                "currency" => $params['currency'],
-                "value"    => $params['amount'],
-            ],
-            "reference" => "YOUR_ORDER_NUMBER",
-            "paymentMethod" => [
+        return [
                 "type"        => "scheme",
                 "number"      => $cardNumber,
-                "expiryMonth" => $month,
-                "expiryYear"  => $year,
-                "cvc"         => $cvv
-            ],
-            "returnUrl" => env('REDIRECT_URL',null),
-            "merchantAccount" => env('ADYEN_MARCHANT_ACCOUNT', null)
+                "expiryMonth" => $expire[0],
+                "expiryYear"  => $expire[1],
+                "cvc"         => $cvv,
         ];
-        return $data;
+    }
+
+    private function prepareAmountParams($params): array
+    {
+       return [
+           "currency" => $params['currency'],
+            "value"    => $params['amount'],
+           ];
     }
 }
