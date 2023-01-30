@@ -8,16 +8,24 @@ use Adyen\Service\Checkout;
 
 class PaymentService
 {
+    CONST ENVIRONMENT = Environment::TEST;
+
+    protected $client;
+
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
+
     public function makePaymentRequest($params)
     {
-        $client = new Client();
-        $client->setEnvironment(Environment::TEST);
-        $client->setXApiKey(env('ADYEN_PAYMENT_KEY', null));
-        $this->prepareParams($request->all());
+        $this->client->setEnvironment(self::ENVIRONMENT);
+        $this->client->setXApiKey(env('ADYEN_PAYMENT_KEY', null));
 
-        $service = new Checkout($client);
-        return $service->payments($params);
-        return
+        $service = new Checkout($this->client);
+
+        return $service->payments(  $this->prepareParams($params));
+
     }
 
 
