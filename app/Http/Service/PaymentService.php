@@ -40,8 +40,8 @@ class PaymentService
 
         $data         = [
             "amount" => [
-                "currency" => "USD",
-                "value" => 1000
+                "currency" => $params['currency'],
+                "value"    => $params['amount'],
             ],
             "reference" => "YOUR_ORDER_NUMBER",
             "paymentMethod" => [
@@ -51,7 +51,7 @@ class PaymentService
                 "expiryYear"  => $year,
                 "cvc"         => $cvv
             ],
-            "returnUrl" => "https://your-company.com/checkout?shopperOrder=12xy..",
+            "returnUrl" => env('REDIRECT_URL',null),
             "merchantAccount" => env('ADYEN_MARCHANT_ACCOUNT', null)
         ];
         return $data;
