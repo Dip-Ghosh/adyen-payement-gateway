@@ -5,30 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PaymentValidationRequest;
 use App\Http\Service\PaymentService;
 
-
 class PaymentController extends Controller
 {
-    protected $paymentService;
+    protected PaymentService $paymentService;
 
     public function __construct(PaymentService $paymentService)
     {
         $this->paymentService = $paymentService;
     }
 
-    public function makePayment(PaymentValidationRequest $request)
+    public function makePayment(PaymentValidationRequest $request): \Illuminate\Http\JsonResponse
     {
         try {
-            $params = $this->paymentService->makePaymentRequest($request->all());
-
-            return response()->json(["response" => $response]);
-        }catch (\Exception $e) {
-
+            return response()->json([
+                "response" => $this->paymentService->makePaymentRequest($request->all())
+            ],200);
+        } catch (\Exception $e) {
             return response()->json([
                 "error" => $e->getMessage(),
                 "code" => $e->getCode()
             ], $e->getStatus());
         }
     }
-
-
 }

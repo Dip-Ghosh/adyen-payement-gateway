@@ -22,7 +22,6 @@ class PaymentService
     {
         $this->client->setEnvironment(self::ENVIRONMENT);
         $this->client->setXApiKey(env('ADYEN_PAYMENT_KEY', null));
-
         $service = new Checkout($this->client);
 
         return $service->payments(  $this->prepareParams($params));
@@ -59,7 +58,7 @@ class PaymentService
     {
        return [
            "currency" => $params['currency'],
-            "value"    => $params['amount'],
+            "value"   => $params['amount'],
            ];
     }
 }
