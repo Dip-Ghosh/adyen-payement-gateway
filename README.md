@@ -7,6 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Project Set up instructions
+1. clone the project git clone  git@github.com:Dip-Ghosh/adyen-payement-gateway.git
+2. Composer install
+3. cp .env.example .env
+4. Add the credentials ADYEN_PAYMENT_KEY, ADYEN_MERCHANT_ACCOUNT, REDIRECT_URL
+5. Run the Project by php artisan serve
+
+If you are using homestead or valet then set up your configuration
+1. Homestead clone the project in the homestead directory
+2. Add the PHP version 8.1 and name and directory of the project in the homestead.yml file
+3. add app.adyen.test in sudo /etc/hosts file with your homestead IP address
+
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

@@ -34,7 +34,7 @@ class PaymentService
             "reference"       => "YOUR_ORDER_NUMBER",
             "paymentMethod"   => $this->preparePaymentParams($params),
             "returnUrl"       => env('REDIRECT_URL',null),
-            "merchantAccount" => env('ADYEN_MARCHANT_ACCOUNT', null),
+            "merchantAccount" => env('ADYEN_MERCHANT_ACCOUNT', null),
         ];
     }
 
@@ -47,9 +47,9 @@ class PaymentService
 
         return [
                 "type"        => "scheme",
-                "number"      => $cardNumber,
-                "expiryMonth" => $expire[0],
-                "expiryYear"  => $expire[1],
+                "number"      => $cardNumber ?? $cardNumber,
+                "expiryMonth" => $expire[0] ?? $expire[0],
+                "expiryYear"  => $expire[1] ?? $expire[1],
                 "cvc"         => $cvv,
         ];
     }

@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/payment',[\App\Http\Controllers\PaymentController::class,'makePayment'])->name('api.payment');
+Route::post('/payment',[\App\Http\Controllers\PaymentController::class,'makePayment'])->name('api.payments');
