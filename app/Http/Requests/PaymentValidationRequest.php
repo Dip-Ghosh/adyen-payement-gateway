@@ -14,7 +14,7 @@ class PaymentValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'card_number' => 'required|max:16',
+            'card_number' => 'required',
             'expire'      => 'required',
             'cvv'         => 'required',
             'currency'    => 'required',
